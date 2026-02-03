@@ -1,0 +1,523 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \{\
+  "database": "mimiciv",\
+  "schemas": [\
+    \{\
+      "name": "mimiciv_hosp",\
+      "tables": [\
+        \{\
+          "name": "admissions",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "admittime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "dischtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "deathtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "admission_type", "primaryKey": false, "dataType": "VARCHAR(40)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "admit_provider_id", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "admission_location", "primaryKey": false, "dataType": "VARCHAR(60)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "discharge_location", "primaryKey": false, "dataType": "VARCHAR(60)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "insurance", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "language", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "marital_status", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "race", "primaryKey": false, "dataType": "VARCHAR(80)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "edregtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "edouttime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "hospital_expire_flag", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "d_hcpcs",\
+          "columns": [\
+            \{ "name": "code", "primaryKey": true, "dataType": "CHAR(5)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "category", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "long_description", "primaryKey": false, "dataType": "TEXT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "short_description", "primaryKey": false, "dataType": "VARCHAR(180)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "diagnoses_icd",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "seq_num", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "icd_code", "primaryKey": true, "dataType": "CHAR(7)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "icd_version", "primaryKey": true, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "d_icd_diagnoses",\
+          "columns": [\
+            \{ "name": "icd_code", "primaryKey": true, "dataType": "CHAR(7)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "icd_version", "primaryKey": true, "dataType": "SMALLINT", "notNull": true, "foreignKey": null \},\
+            \{ "name": "long_title", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "d_icd_procedures",\
+          "columns": [\
+            \{ "name": "icd_code", "primaryKey": true, "dataType": "CHAR(7)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "icd_version", "primaryKey": true, "dataType": "SMALLINT", "notNull": true, "foreignKey": null \},\
+            \{ "name": "long_title", "primaryKey": false, "dataType": "VARCHAR(222)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "d_labitems",\
+          "columns": [\
+            \{ "name": "itemid", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "label", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "fluid", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "category", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "drgcodes",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "drg_type", "primaryKey": false, "dataType": "VARCHAR(4)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "drg_code", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "description", "primaryKey": false, "dataType": "VARCHAR(195)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "drg_severity", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "drg_mortality", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "emar_detail",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "emar_id", "primaryKey": true, "dataType": "VARCHAR(25)", "notNull": true, "foreignKey": "mimiciv_hosp.emar.emar_id" \},\
+            \{ "name": "emar_seq", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "parent_field_ordinal", "primaryKey": true, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "administration_type", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "pharmacy_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "barcode_type", "primaryKey": false, "dataType": "VARCHAR(4)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "reason_for_no_barcode", "primaryKey": false, "dataType": "TEXT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "complete_dose_not_given", "primaryKey": false, "dataType": "VARCHAR(5)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dose_due", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dose_due_unit", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dose_given", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dose_given_unit", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "will_remainder_of_dose_be_given", "primaryKey": false, "dataType": "VARCHAR(5)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "product_amount_given", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "product_unit", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "product_code", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "product_description", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "product_description_other", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "prior_infusion_rate", "primaryKey": false, "dataType": "VARCHAR(40)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "infusion_rate", "primaryKey": false, "dataType": "VARCHAR(40)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "infusion_rate_adjustment", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "infusion_rate_adjustment_amount", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "infusion_rate_unit", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "route", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "infusion_complete", "primaryKey": false, "dataType": "VARCHAR(1)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "completion_interval", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "new_iv_bag_hung", "primaryKey": false, "dataType": "VARCHAR(1)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "continued_infusion_in_other_location", "primaryKey": false, "dataType": "VARCHAR(1)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "restart_interval", "primaryKey": false, "dataType": "VARCHAR(2305)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "side", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "site", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "non_formulary_visual_verification", "primaryKey": false, "dataType": "VARCHAR(1)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "emar",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "emar_id", "primaryKey": true, "dataType": "VARCHAR(25)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "emar_seq", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "poe_id", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "pharmacy_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "enter_provider_id", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "charttime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "medication", "primaryKey": false, "dataType": "TEXT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "event_txt", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "scheduletime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "hcpcsevents",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "chartdate", "primaryKey": false, "dataType": "DATE", "notNull": false, "foreignKey": null \},\
+            \{ "name": "hcpcs_cd", "primaryKey": true, "dataType": "CHAR(5)", "notNull": true, "foreignKey": "mimiciv_hosp.d_hcpcs.code" \},\
+            \{ "name": "seq_num", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "short_description", "primaryKey": false, "dataType": "VARCHAR(180)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "labevents",\
+          "columns": [\
+            \{ "name": "labevent_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "specimen_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.d_labitems.itemid" \},\
+            \{ "name": "order_provider_id", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "charttime", "primaryKey": false, "dataType": "TIMESTAMP(0)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP(0)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "value", "primaryKey": false, "dataType": "VARCHAR(200)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "valuenum", "primaryKey": false, "dataType": "DOUBLE PRECISION", "notNull": false, "foreignKey": null \},\
+            \{ "name": "valueuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ref_range_lower", "primaryKey": false, "dataType": "DOUBLE PRECISION", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ref_range_upper", "primaryKey": false, "dataType": "DOUBLE PRECISION", "notNull": false, "foreignKey": null \},\
+            \{ "name": "flag", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "priority", "primaryKey": false, "dataType": "VARCHAR(7)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "comments", "primaryKey": false, "dataType": "TEXT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "microbiologyevents",\
+          "columns": [\
+            \{ "name": "microevent_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "micro_specimen_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "order_provider_id", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "chartdate", "primaryKey": false, "dataType": "TIMESTAMP(0)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "charttime", "primaryKey": false, "dataType": "TIMESTAMP(0)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "spec_itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "spec_type_desc", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "test_seq", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "storedate", "primaryKey": false, "dataType": "TIMESTAMP(0)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP(0)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "test_itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "test_name", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "org_itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "org_name", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "isolate_num", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "quantity", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ab_itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ab_name", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dilution_text", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dilution_comparison", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dilution_value", "primaryKey": false, "dataType": "DOUBLE PRECISION", "notNull": false, "foreignKey": null \},\
+            \{ "name": "interpretation", "primaryKey": false, "dataType": "VARCHAR(5)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "comments", "primaryKey": false, "dataType": "TEXT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "omr",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "chartdate", "primaryKey": false, "dataType": "DATE", "notNull": true, "foreignKey": null \},\
+            \{ "name": "seq_num", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "result_name", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "result_value", "primaryKey": false, "dataType": "TEXT", "notNull": true, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "patients",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "gender", "primaryKey": false, "dataType": "CHAR(1)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "anchor_age", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "anchor_year", "primaryKey": false, "dataType": "SMALLINT", "notNull": true, "foreignKey": null \},\
+            \{ "name": "anchor_year_group", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "dod", "primaryKey": false, "dataType": "DATE", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "pharmacy",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "pharmacy_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "poe_id", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "starttime", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "stoptime", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "medication", "primaryKey": false, "dataType": "TEXT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "proc_type", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "status", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "entertime", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "verifiedtime", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "route", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "frequency", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "disp_sched", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "infusion_type", "primaryKey": false, "dataType": "VARCHAR(15)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "sliding_scale", "primaryKey": false, "dataType": "VARCHAR(1)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "lockout_interval", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "basal_rate", "primaryKey": false, "dataType": "REAL", "notNull": false, "foreignKey": null \},\
+            \{ "name": "one_hr_max", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "doses_per_24_hrs", "primaryKey": false, "dataType": "REAL", "notNull": false, "foreignKey": null \},\
+            \{ "name": "duration", "primaryKey": false, "dataType": "REAL", "notNull": false, "foreignKey": null \},\
+            \{ "name": "duration_interval", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "expiration_value", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "expiration_unit", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "expirationdate", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dispensation", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "fill_quantity", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "poe_detail",\
+          "columns": [\
+            \{ "name": "poe_id", "primaryKey": true, "dataType": "VARCHAR(25)", "notNull": true, "foreignKey": "mimiciv_hosp.poe.poe_id" \},\
+            \{ "name": "poe_seq", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "field_name", "primaryKey": true, "dataType": "VARCHAR(255)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "field_value", "primaryKey": false, "dataType": "TEXT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "poe",\
+          "columns": [\
+            \{ "name": "poe_id", "primaryKey": true, "dataType": "VARCHAR(25)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "poe_seq", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "ordertime", "primaryKey": false, "dataType": "TIMESTAMP(0)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "order_type", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "order_subtype", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "transaction_type", "primaryKey": false, "dataType": "VARCHAR(15)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "discontinue_of_poe_id", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "discontinued_by_poe_id", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "order_provider_id", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "order_status", "primaryKey": false, "dataType": "VARCHAR(15)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "prescriptions",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "pharmacy_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "poe_id", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "poe_seq", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "order_provider_id", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "starttime", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "stoptime", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "drug_type", "primaryKey": true, "dataType": "VARCHAR(20)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "drug", "primaryKey": true, "dataType": "VARCHAR(255)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "formulary_drug_cd", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "gsn", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ndc", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "prod_strength", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "form_rx", "primaryKey": false, "dataType": "VARCHAR(25)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dose_val_rx", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "dose_unit_rx", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "form_val_disp", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "form_unit_disp", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "doses_per_24_hrs", "primaryKey": false, "dataType": "REAL", "notNull": false, "foreignKey": null \},\
+            \{ "name": "route", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "procedures_icd",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "seq_num", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "chartdate", "primaryKey": false, "dataType": "DATE", "notNull": true, "foreignKey": null \},\
+            \{ "name": "icd_code", "primaryKey": true, "dataType": "VARCHAR(7)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "icd_version", "primaryKey": true, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "provider",\
+          "columns": [\
+            \{ "name": "provider_id", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": true, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "services",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "transfertime", "primaryKey": true, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "prev_service", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "curr_service", "primaryKey": true, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "transfers",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "transfer_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "eventtype", "primaryKey": false, "dataType": "VARCHAR(10)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "careunit", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "intime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "outtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \}\
+          ]\
+        \}\
+      ]\
+    \},\
+    \{\
+      "name": "mimiciv_icu",\
+      "tables": [\
+        \{\
+          "name": "caregiver",\
+          "columns": [\
+            \{ "name": "caregiver_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "chartevents",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "stay_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.icustays.stay_id" \},\
+            \{ "name": "caregiver_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "charttime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.d_items.itemid" \},\
+            \{ "name": "value", "primaryKey": false, "dataType": "VARCHAR(200)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "valuenum", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "valueuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "warning", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "datetimeevents",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "stay_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.icustays.stay_id" \},\
+            \{ "name": "caregiver_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "charttime", "primaryKey": true, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "itemid", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.d_items.itemid" \},\
+            \{ "name": "value", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "valueuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "warning", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "d_items",\
+          "columns": [\
+            \{ "name": "itemid", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "label", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "abbreviation", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "linksto", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "category", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "unitname", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "param_type", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "lownormalvalue", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "highnormalvalue", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "icustays",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "stay_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "first_careunit", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "last_careunit", "primaryKey": false, "dataType": "VARCHAR(255)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "intime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "outtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "los", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "ingredientevents",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "stay_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "caregiver_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "starttime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "endtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "amount", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "amountuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "rate", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "rateuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "orderid", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "linkorderid", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "statusdescription", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "originalamount", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "originalrate", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "inputevents",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "stay_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": "mimiciv_icu.icustays.stay_id" \},\
+            \{ "name": "caregiver_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "starttime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "endtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": false, "foreignKey": null \},\
+            \{ "name": "itemid", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.d_items.itemid" \},\
+            \{ "name": "amount", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "amountuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "rate", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "rateuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "orderid", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": null \},\
+            \{ "name": "linkorderid", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ordercategoryname", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "secondaryordercategoryname", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ordercomponenttypedescription", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ordercategorydescription", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "patientweight", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "totalamount", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "totalamountuom", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "isopenbag", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "continueinnextdept", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "statusdescription", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "originalamount", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "originalrate", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "outputevents",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "stay_id", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.icustays.stay_id" \},\
+            \{ "name": "caregiver_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "charttime", "primaryKey": true, "dataType": "TIMESTAMP(3)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP(3)", "notNull": true, "foreignKey": null \},\
+            \{ "name": "itemid", "primaryKey": true, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.d_items.itemid" \},\
+            \{ "name": "value", "primaryKey": false, "dataType": "FLOAT", "notNull": true, "foreignKey": null \},\
+            \{ "name": "valueuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \}\
+          ]\
+        \},\
+        \{\
+          "name": "procedureevents",\
+          "columns": [\
+            \{ "name": "subject_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.patients.subject_id" \},\
+            \{ "name": "hadm_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_hosp.admissions.hadm_id" \},\
+            \{ "name": "stay_id", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.icustays.stay_id" \},\
+            \{ "name": "caregiver_id", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "starttime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "endtime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "storetime", "primaryKey": false, "dataType": "TIMESTAMP", "notNull": true, "foreignKey": null \},\
+            \{ "name": "itemid", "primaryKey": false, "dataType": "INTEGER", "notNull": true, "foreignKey": "mimiciv_icu.d_items.itemid" \},\
+            \{ "name": "value", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "valueuom", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "location", "primaryKey": false, "dataType": "VARCHAR(100)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "locationcategory", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "orderid", "primaryKey": true, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "linkorderid", "primaryKey": false, "dataType": "INTEGER", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ordercategoryname", "primaryKey": false, "dataType": "VARCHAR(50)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "ordercategorydescription", "primaryKey": false, "dataType": "VARCHAR(30)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "patientweight", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "isopenbag", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "continueinnextdept", "primaryKey": false, "dataType": "SMALLINT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "statusdescription", "primaryKey": false, "dataType": "VARCHAR(20)", "notNull": false, "foreignKey": null \},\
+            \{ "name": "originalamount", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \},\
+            \{ "name": "originalrate", "primaryKey": false, "dataType": "FLOAT", "notNull": false, "foreignKey": null \}\
+          ]\
+        \}\
+      ]\
+    \},\
+    \{\
+      "name": "mimiciv_derived",\
+      "tables": []\
+    \}\
+  ]\
+\}}

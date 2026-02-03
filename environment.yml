@@ -1,0 +1,19 @@
+name: thesis
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13.2
+  - ipykernel
+  - jupyter
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - sqlalchemy
+  - pytest
+  - python-dotenv
+  # Postgres-Treiber (empfohlen für SQLAlchemy)
+  - psycopg
+  - libpq
+  - pip
