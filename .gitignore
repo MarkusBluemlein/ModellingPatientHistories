@@ -5,6 +5,7 @@
 
 # --- Data ---
 /data/raw/
+/mimic-code/
 *.dump
 *.backup
 *.tar
