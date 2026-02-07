@@ -28,3 +28,6 @@ dependencies:
   # Test / Tooling
   - pytest
   - pip
+  # Installiere das lokale Projekt als Paket (src/mph wird importierbar)
+  - pip:
+      - -e .
