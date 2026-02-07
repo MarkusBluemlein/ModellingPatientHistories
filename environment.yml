@@ -3,17 +3,28 @@ channels:
   - conda-forge
 dependencies:
   - python=3.13.2
+
+  # Notebook
   - ipykernel
   - jupyter
+  - jupyterlab
+
+  # Data Science
   - numpy
   - pandas
   - scikit-learn
   - matplotlib
   - seaborn
+
+  # DB / Konfiguration
   - sqlalchemy
-  - pytest
-  - python-dotenv
-  # Postgres-Treiber (empfohlen für SQLAlchemy)
   - psycopg
-  - libpq
+  - libpq  
+  - python-dotenv
+
+  # File formats
+  - pyarrow
+  
+  # Test / Tooling
+  - pytest
   - pip
