@@ -7,5 +7,5 @@ def project_root() -> Path:
 def data_dir() -> Path:
     return project_root() / "data"
 
-def outcome_dir() -> Path:
+def outputs_dir() -> Path:
     return project_root() / "outputs"
