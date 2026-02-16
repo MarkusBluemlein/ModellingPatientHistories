@@ -1,0 +1,15 @@
+{
+  "time": {
+    "step_unit": "month",
+    "step_size": 1
+  },
+  "followup": {
+    "max_months": 12
+  },
+  "model": {
+    "start_state_t0": "gesund"
+  },
+  "io": {
+    "data_processed_format": "json"
+  }
+}
