@@ -8,12 +8,17 @@ from __future__ import annotations
 from pathlib import Path
 
 def project_root() -> Path:
-    """Ermittelt das Root-Verzeichnis des Repositories (robust über Marker)."""
+    """Ermittelt das Repo-Root anhand des Ordnernamens 'ModellingPatientHistories'."""
     here = Path(__file__).resolve()
-    for p in [here.parent] + list(here.parents):
-        if (p / "params.json").exists() and (p / "src").exists() and (p / "data").exists():
-            return p
-    return here.parents[2]
+    PROJECT_ROOT = next((p for p in here.parents if p.name == "ModellingPatientHistories"), None)
+
+    if PROJECT_ROOT is None:
+        raise RuntimeError(
+            f"Unerwarteter Projektroot: {here} (Name ist {here.name}). "
+            "Starte das Notebook aus ModellingPatientHistories/notebooks oder passe parents[...] an."
+        )
+
+    return PROJECT_ROOT
 
 def src_dir() -> Path:
     return project_root() / "src"
